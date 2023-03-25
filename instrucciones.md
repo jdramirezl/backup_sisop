@@ -8,7 +8,7 @@ El objetivo de esta práctica evaluable es crear un programa que permita realiza
 
 El programa de copia de seguridad debe cumplir los siguientes requisitos:
 
-* Recibir como entrada la ruta de la carpeta que se desea copiar y la ruta de la carpeta donde se guardarán los fragmentos de la copia de seguridad.
+* Recibir como entrada la ruta de la carpeta que se desea copir y la ruta de la carpeta donde se guardarán los fragmentos de la copia de seguridad.
 * Dividir los archivos de la carpeta original en varios fragmentos de tamaño máximo de 512 MB, y guardarlos en la carpeta de la copia de seguridad.
 * Nombrar los fragmentos de la copia de seguridad de forma que se pueda identificar fácilmente a qué carpeta pertenecen y en qué orden deben ser restaurados.
 * Imprimir un mensaje indicando que la copia de seguridad se ha completado con éxito.
