@@ -1,5 +1,7 @@
 import os
 import json
+from tkinter import Tk 
+from tkinter.filedialog import askdirectory
 
 def valid_path(path):
     return os.path.exists(path) and os.path.isdir(path)
@@ -42,7 +44,7 @@ def restore(backup_folder, restore_folder, backup_config):
             with open(fragment_file, "rb") as f: # Leemos en bytes
                 data = f.read()
                 restored_file = os.path.join(restore_folder, restored_file_name) # Recreamos el archivo
-                with open(restored_file, "wb") as restored_f: # Guardamos en bytes de neuvo
+                with open(restored_file, "ab") as restored_f: # Guardamos en bytes de neuvo
                     restored_f.write(data)
     
     return restored_files
@@ -78,4 +80,10 @@ def main(backup_folder, restore_folder):
 
     print(f"Restauración completada con éxito. {restored_files} archivos restaurados.")
 
-main("..\\prueba_backup", "..\\")
+Tk().withdraw()
+print("Escoge el directorio del backup", flush=True)
+carpeta_de_backup = askdirectory()
+print("Escoge el directorio donde poner el directorio recuperado", flush=True)
+carpeta_de_restauracion = askdirectory()
+
+main("./prueba_backup", "./")

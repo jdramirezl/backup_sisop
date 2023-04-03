@@ -1,8 +1,11 @@
 import os
 import json
 import math
+from tkinter import Tk 
+from tkinter.filedialog import askdirectory
 
-CHUNK_SIZE: int = 2
+
+CHUNK_SIZE: int = 512 * int(1e6)
 
 def valid_path(path):
     return os.path.exists(path) and os.path.isdir(path)
@@ -21,7 +24,7 @@ def backup(files, backup_path):
     for file_path in files:
         # Calculamos numero de chunks
         file_size = os.path.getsize(file_path)
-        chunks = math.ceil(file_size / (CHUNK_SIZE * 1024 * 1024))  # 512 MB en bytes
+        chunks = math.ceil(file_size / CHUNK_SIZE)
 
         with open(file_path, "rb") as og_file: # Abrimos el archivo original en Read Bytes
             filename = os.path.basename(file_path) # Sacamos el nombre del archivo
@@ -29,7 +32,7 @@ def backup(files, backup_path):
             for i in range(chunks):
                 chunk_path = os.path.join(backup_path, f"{filename}.{i+1}.backup") # Por cada chunk con nombre secuencial, 
                 with open(chunk_path, "wb") as chunk_f: # Abrimos el archivo de chunk en Write Bytes
-                    chunk_f.write(og_file.read(CHUNK_SIZE * 1024 * 1024)) # Guardamos las megas dadas (Ej, 512)
+                    chunk_f.write(og_file.read(CHUNK_SIZE))
             
             
             file_name = os.path.basename(file_path)
@@ -74,9 +77,10 @@ def main(source_folder, backup_folder):
     # Terminar
     print("Backup completed")
 
+Tk().withdraw()
+print("Escoge el directorio que le quieres hacer backup", flush=True)
+carpeta_de_entrada = askdirectory()
+print("Escoge el directorio donde poner el backup", flush=True)
+carpeta_de_salida = askdirectory()
 
-
-main('..\\prueba', '..\\')
-
-# TODO: Definir variable de entorno para CHUNK_SIZE
-# TODO: Recibir argumentos de la linea de comandos
+main(carpeta_de_entrada, './')
