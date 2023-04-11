@@ -86,4 +86,4 @@ carpeta_de_backup = askdirectory()
 print("Escoge el directorio donde poner el directorio recuperado", flush=True)
 carpeta_de_restauracion = askdirectory()
 
-main("./prueba_backup", "./")
+main(carpeta_de_backup, carpeta_de_restauracion)

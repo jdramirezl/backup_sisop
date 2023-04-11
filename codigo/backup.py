@@ -5,7 +5,7 @@ from tkinter import Tk
 from tkinter.filedialog import askdirectory
 
 
-CHUNK_SIZE: int = 512 * int(1e6)
+CHUNK_SIZE: int = 512 * int(1e3)
 
 def valid_path(path):
     return os.path.exists(path) and os.path.isdir(path)
@@ -83,4 +83,4 @@ carpeta_de_entrada = askdirectory()
 print("Escoge el directorio donde poner el backup", flush=True)
 carpeta_de_salida = askdirectory()
 
-main(carpeta_de_entrada, './')
+main(carpeta_de_entrada, carpeta_de_salida)
